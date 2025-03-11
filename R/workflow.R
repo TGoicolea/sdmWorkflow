@@ -13,7 +13,7 @@
     .w <- comb[[i]] # which variables/layers combination in item i of the comb list?
     .prs <- preds[[.w]] # selected variable combinations!
     d <- sdmData(species~., .sp, .prs, bg=list(method='gRandom',n=bgn))
-    m <- sdm(species~., d, methods = c('glmp','brt','svm','bioclim.dismo','mda','maxent','rf','mlp','cart','mars'), #,'mda'maxent','rf','mlp''cart',
+    m <- sdm(species~., d, methods = c('glmp','brt','svm','bioclim.dismo','mda','maxent','rf','mlp','cart','maxlike'), #,'mda'maxent','rf','mlp''cart',
              n=n,replication='boot')
     e <- .getEval(m,n='species',setting=list(method='weighted',stat='auc')) # from model -> get Evaluation based on Ensemble
     .auc[i] <- e@statistics$AUC
@@ -37,7 +37,7 @@
   .w <- comb[[i]] # which variables/layers combination in item i of the comb list?
   .prs <- preds[[.w]] # selected variable combinations!
   d <- sdmData(species~., .sp, .prs, bg=list(method = 'gRandom',n=bgn))
-  m <- sdm(species~., d, methods = c('glmp','brt','rf','svm','cart','maxent','bioclim.dismo','mlp','mda','mars'),
+  m <- sdm(species~., d, methods = c('glmp','brt','rf','svm','cart','maxent','bioclim.dismo','mlp','mda','maxlike'),
            n=n,replication='boot')
   #----
   if (path == '.') write.sdm(m, filename = paste0('models/M_',i,'_',spn,'_',filename,'.sdm'),overwrite=TRUE)
